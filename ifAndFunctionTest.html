@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body></body>
+    <script>
+        function three(a, b) {
+            if (a >= 0 && a <= 100 && b >= 0 && b <= 100) {
+                if (a >= 40 && b > 40 && a + b > 120) {
+                    console.log("합격");
+                } else console.log("불합격");
+            } else alert("장난?");
+        }
+
+        three(70, 70);
+        three(101, 100);
+        three(50, 50);
+    </script>
+</html>

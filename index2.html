@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Document</title>
+        <link rel="stylesheet" href="main2.css" />
+    </head>
+    <body>
+        <div class="alert-box" id="alert-box">
+            <p id="alert-inner">알림창</p>
+            <button id="close">닫기</button>
+        </div>
+        <button class="button-box" onclick="displayAlert('ID창', 'block')">
+            버튼1
+        </button>
+        <button class="button-box" onclick="displayAlert('PW창', 'block')">
+            버튼2
+        </button>
+    </body>
+    <script>
+        document.getElementById("close").addEventListener("click", function () {
+            document.querySelector(".alert-box").style.display = "none";
+        });
+
+        function displayAlert(inner, status) {
+            document.querySelector("#alert-inner").innerHTML = inner;
+            document.querySelector(".alert-box").style.display = status;
+        }
+    </script>
+</html>

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+            crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="main7.css" />
+        <title>JS_CodingApple</title>
+        <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row"></div>
+        </div>
+        <div class="container my-3">
+            <button class="btn btn-danger" id="add">더보기</button>
+        </div>
+        <div class="container my-3">
+            <button class="btn btn-danger" id="price">가격순</button>
+        </div>
+        <div class="container my-3">
+            <button class="btn btn-danger" id="da">다나가순</button>
+        </div>
+        <div class="container my-3">
+            <button class="btn btn-danger" id="six">6만원 이하</button>
+        </div>
+        <div class="container my-3">
+            <input type="text" class="form-control" id="pricetxt" />
+        </div>
+
+        <script>
+            var products = [
+                { id: 0, price: 70000, title: "Blossom Dress" },
+                { id: 1, price: 50000, title: "Springfield Shirt" },
+                { id: 2, price: 60000, title: "Black Monastery" },
+            ];
+
+            products.forEach((a) => {
+                var a = `<div class="col-sm-4">
+                    <img src="https://via.placeholder.com/600" class="w-100" />
+                    <h5>${a.title}</h5>
+                    <p>가격 : ${a.price}</p>
+                    <button class="buy">장바구니</button>
+                </div>`;
+                $(".row").append(a);
+            });
+
+            var arr = [];
+
+            $(".buy").on("click", function (e) {
+                var item = $(e.target).siblings("h5").html();
+
+                if (localStorage.getItem("cart") != null) {
+                    var test = 0;
+                    var out = JSON.parse(localStorage.cart);
+                    console.log(out);
+
+                    for (let i = 0; i < out.length; i++) {
+                        if (out[i] == item) {
+                            test++;
+                        }
+                    }
+
+                    console.log(test);
+
+                    if (test == 0) {
+                        out.push(item);
+                        localStorage.setItem("cart", JSON.stringify(out));
+                    }
+                } else {
+                    localStorage.setItem("cart", JSON.stringify([item]));
+                }
+            });
+
+            var arr2 = [1, 2, 3];
+            var newarr = JSON.stringify(arr2);
+
+            function ajax(url) {
+                $.get(url).done((data) => {
+                    data.forEach((a) => {
+                        var text = `<div class="col-sm-4">
+                            <img src="https://via.placeholder.com/600" class="w-100" />
+                            <h5>${a.title}</h5>
+                            <p>가격 : ${a.price}</p>
+                        </div>`;
+                        $(".row").append(text);
+                    });
+                });
+            }
+
+            var btn_click = 0;
+
+            $("#add").on("click", function () {
+                btn_click++;
+                if (btn_click == 1) {
+                    ajax("https://codingapple1.github.io/js/more1.json");
+                } else if (btn_click == 2) {
+                    ajax("https://codingapple1.github.io/js/more2.json");
+                    $(".btn").addClass("hide");
+                }
+            });
+
+            var arr = ["a", "b", "e", "h", "c"];
+            arr.sort(function (a, b) {
+                if (a > b) {
+                    return -1;
+                } else return 1;
+            });
+            console.log(arr);
+
+            $("#price").click(function () {
+                products.sort(function (a, b) {
+                    return a.price - b.price;
+                });
+                $(".row").html("");
+                products.forEach((a) => {
+                    var a = `<div class="col-sm-4">
+                        <img src="https://via.placeholder.com/600" class="w-100" />
+                        <h5>${a.title}</h5>
+                        <p>가격 : ${a.price}</p>
+                    </div>`;
+                    $(".row").append(a);
+                });
+            });
+
+            $("#six").click(function () {
+                var fproducts = products.filter(function (a) {
+                    return a.price <= 60000;
+                });
+                $(".row").html("");
+                fproducts.forEach((a) => {
+                    var a = `<div class="col-sm-4">
+                        <img src="https://via.placeholder.com/600" class="w-100" />
+                        <h5>${a.title}</h5>
+                        <p>가격 : ${a.price}</p>
+                    </div>`;
+                    $(".row").append(a);
+                });
+            });
+
+            $("#da").click(function () {
+                products.sort(function (a, b) {
+                    if (a.title > b.title) {
+                        return -1;
+                    } else return 1;
+                });
+                $(".row").html("");
+                products.forEach((a) => {
+                    var a = `<div class="col-sm-4">
+                        <img src="https://via.placeholder.com/600" class="w-100" />
+                        <h5>${a.title}</h5>
+                        <p>가격 : ${a.price}</p>
+                    </div>`;
+                    $(".row").append(a);
+                });
+            });
+
+            document
+                .getElementById("pricetxt")
+                .addEventListener("change", function (pricetxt) {
+                    var inputtxt = document.getElementById("pricetxt").value;
+                    var fproducts = products.filter(function (a) {
+                        return a.price <= inputtxt;
+                    });
+                    $(".row").html("");
+                    fproducts.forEach((a) => {
+                        var a = `<div class="col-sm-4">
+                            <img src="https://via.placeholder.com/600" class="w-100" />
+                            <h5>${a.title}</h5>
+                            <p>가격 : ${a.price}</p>
+                        </div>`;
+                        $(".row").append(a);
+                    });
+                });
+        </script>
+    </body>
+</html>

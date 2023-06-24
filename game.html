@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script
+            src="https://code.jquery.com/jquery-3.7.0.min.js"
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+            crossorigin="anonymous"
+        ></script>
+    </head>
+    <body>
+        <h4>선택</h4>
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+
+        <script>
+            var a = 0;
+
+            $("button").on("click", function (e) {
+                a = e.target.innerHTML;
+                switch (a) {
+                    case "1":
+                        alert("1선택");
+                        break;
+                    case "2":
+                        alert("2선택");
+                        break;
+                    case "3":
+                        alert("3선택");
+                        break;
+                }
+            });
+        </script>
+    </body>
+</html>
